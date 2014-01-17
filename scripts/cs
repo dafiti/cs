@@ -1,0 +1,48 @@
+#!/usr/bin/env python2.7
+
+from sys import argv, exit
+import argparse
+from cs.starter import Starter
+from cs.plugins import *
+import cs.messages
+import cs.configuration as configuration
+import cs.debug as debug
+import os.path
+import xml.etree.ElementTree as ET
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description='DCQC - code quality')
+    parser.add_argument('branch', help='The branch that have to be checked')
+    parser.add_argument('-p', '--path', help='The path of configurations and tests files')
+    parser.add_argument('-d', '--debug', help='Active debug mode', action='store_true')
+    args = parser.parse_args()
+    default_test_path = 'tests/'
+
+    if os.path.isfile('build.xml'):
+        tree = ET.parse('build.xml')
+        root = tree.getroot()
+        cs_node = root.find('codesheriff')
+        if cs_node != None:
+            default_test_path_node = cs_node.find('default_test_path')
+            if default_test_path_node != None:
+                default_test_path = default_test_path_node.text
+
+    branch = args.branch
+    if (args.path != None):
+        default_test_path = args.path
+    
+    configuration.SHOW_DEBUG = args.debug
+
+    cs.messages.header()
+    starter = Starter(branch, default_test_path)
+    starter.attach(phpcs.Phpcs(starter.control_version, starter.changed_files))
+    starter.attach(phpmd.Phpmd(starter.control_version, starter.changed_files))
+    starter.attach(phpunitcoverage.Phpunitcoverage(starter.control_version))
+
+    final_status = starter.run()
+    debug.show("DCQC RESULT: %s" % (final_status))
+
+    if (final_status == 'bad'):
+        exit(1)
+
