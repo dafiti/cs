@@ -13,13 +13,13 @@ class Statistics:
 
     def validate(self, collection):
         if (type(collection) != dict 
-            or self.is_valid_branch_data(collection, self.MASTER) == False
-            or self.is_valid_branch_data(collection, self.BRANCH) == False):
+            or not self.is_valid_branch_data(collection, self.MASTER)
+            or not self.is_valid_branch_data(collection, self.BRANCH)):
             message = "Collection must be dictionary with '%s' and '%s' keys as dictionary too."
             raise ValueError(message % (self.MASTER, self.BRANCH))
 
     def is_valid_branch_data(self, collection, branch):
-        if (collection.has_key(branch) == False or type(collection[branch]) != dict):
+        if not branch in collection or type(collection[branch]) is not dict:
             return False
         return True
 

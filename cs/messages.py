@@ -1,5 +1,5 @@
 from termcolor import colored, cprint
-import cs.configuration
+from cs import configuration
 
 CHARS_PER_LINE = 80
 
@@ -31,8 +31,8 @@ def colored_problems(problems):
 
 def progress_bar(status, problems):
     messages = {
-        'ok': {'text':'Ok :)', 'bgcolor': 'on_yellow'}, 
-        'great': {'text':'Great :D', 'bgcolor': 'on_green'}, 
+        'ok': {'text':'Ok :)', 'bgcolor': 'on_yellow'},
+        'great': {'text':'Great :D', 'bgcolor': 'on_green'},
         'bad':  {'text':'Bad :(', 'bgcolor': 'on_red'}
         }
     text = progress_message(problems) + " " + messages[status]['text']

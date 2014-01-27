@@ -46,7 +46,7 @@ class Quality:
     def set_default_test_path(self, default_test_path):
         app_path = os.getcwd()
         self.default_test_path = "%s/%s" % (app_path, default_test_path)
-        if (os.path.exists(self.default_test_path) == False):
+        if not os.path.exists(self.default_test_path):
             raise ValueError('Invalid default test path: "%s"' % (self.default_test_path))
 
     def get_default_test_path(self, sufix = ''):

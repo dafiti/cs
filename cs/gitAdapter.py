@@ -53,7 +53,7 @@ class GitAdapter:
         self.checkout_master()
         try:
             changes = self.repo.index.diff(self.current_branch)
-        except BadObject, e:
+        except BadObject:
             self.checkout_initial_branch()
             print 'An error has occurred when tried to diff the branches. Are you sure that the branch exists?'
             exit(1)
@@ -63,19 +63,19 @@ class GitAdapter:
         return files
 
     def get_file_name(self, obj):
-        if (obj.a_blob != None):
+        if (obj.a_blob is not None):
             return obj.a_blob.path
-        elif (obj.b_blob != None):
+        elif (obj.b_blob is not None):
             return obj.b_blob.path
         return None
 
     def get_file_branch(self, obj):
         action = 'none'
-        if (obj.a_blob != None and obj.b_blob != None):
+        if (obj.a_blob is not None and obj.b_blob is not None):
             action = 'both'
-        elif (obj.a_blob != None):
+        elif (obj.a_blob is not None):
             action = configuration.EXAMINATED_BRANCH
-        elif (obj.b_blob != None):
+        elif (obj.b_blob is not None):
             action = configuration.MASTER_BRANCH
         return action
 
