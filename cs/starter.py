@@ -1,11 +1,7 @@
 from cs.gitAdapter import GitAdapter
-from cs.statistics import Statistics
-import cs.configuration as configuration
-import json
-import cs.messages
 import cs.debug as debug
 
-class Starter:
+class Starter(object):
     changed_files = {}
     results = {}
     scores = {}

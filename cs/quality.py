@@ -25,7 +25,6 @@ class Quality:
 
     def check(self, examinated_branch):
         raise Exception("Implement check method in child class returning int")
-        exit(2)
 
     def diff(self, branch_problems, master_problems):
         print "Implement diff method in child class returning json"

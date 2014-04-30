@@ -1,9 +1,8 @@
-from cs.quality import *
+from cs.quality import Quality
 from subprocess import *
 import os
-import string
 import re
-import cs.debug
+from cs import debug
 
 class Phpunitcoverage(Quality):
 
@@ -35,7 +34,6 @@ class Phpunitcoverage(Quality):
 
     def parse_summary(self, coverage_result):
         summary = {}
-        regex = re.compile("((Classes|Methods|Lines):)\ +(\d{2,3}\.\d{1,2})%", re.UNICODE)
         for line in coverage_result.split('\n'):
             matchObj = re.match( r'.*(Classes|Methods|Lines): +(\d{1,3}\.\d{1,2}).*', line, re.M|re.I)
             if matchObj:
@@ -57,8 +55,8 @@ class Phpunitcoverage(Quality):
         return result
 
     def get_status(self, coverage_progress):
-        if (coverage_progress < 0):
+        if coverage_progress < 0:
             return -1
-        if (coverage_progress > 0):
+        if coverage_progress > 0:
             return 1
         return 0
