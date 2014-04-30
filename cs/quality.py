@@ -24,7 +24,7 @@ class Quality:
         return self.get_status(self.result['diff']['final_score'])
 
     def check(self, examinated_branch):
-        print "Implement check method in child class returning int"
+        raise Exception("Implement check method in child class returning int")
         exit(2)
 
     def diff(self, branch_problems, master_problems):

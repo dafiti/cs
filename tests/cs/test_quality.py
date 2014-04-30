@@ -28,3 +28,9 @@ def test_get_status_name_great():
     result = quality.get_status_name(1)
 
     assert expected == result
+
+def test_check():
+    quality = Quality("mock")
+
+    with pytest.raises(Exception):
+        quality.check("master")
