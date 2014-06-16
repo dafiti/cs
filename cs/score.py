@@ -37,6 +37,8 @@ class Score(Quality):
         result = {'files': {}}
         debug.show("\nProgress details:")
         for file_name, problems in branch_problems.iteritems():
+            if file_name not in master_problems:
+                continue
             score_file = problems - master_problems[file_name]
             result['files'][file_name] = {'problems_caused': score_file}
             final_score += score_file

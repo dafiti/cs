@@ -59,6 +59,8 @@ class GitAdapter:
             exit(1)
 
         for obj in changes:
+            # if obj.deleted_file == True:
+            #     continue
             files[self.get_file_name(obj)] = self.get_file_branch(obj)
         return files
 

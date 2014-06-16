@@ -13,7 +13,6 @@ cs/quality.py
 cs/score.py
 cs/starter.py
 cs/statistics.py
-cs/text.py
 cs/plugins/__init__.py
 cs/plugins/phpcs.py
 cs/plugins/phpmd.py

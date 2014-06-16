@@ -16,6 +16,9 @@ class Phpunitcoverage(Quality):
             exit(2)
         Quality.__init__(self, control_version)
 
+    def get_name(self):
+        return 'phpunit'
+
     def check(self, examinated_branch):
         result = {}
         result = self.get_problems()
