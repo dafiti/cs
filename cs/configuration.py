@@ -1,16 +1,57 @@
-#import argparse
-#__autthor__ = "dafiti"
-#parser = argparse.ArgumentParser(description='DCQC - Dafiti Control Quality Code')
-#parser.add_argument('-d','--debug', help='Activate debug mode', default=False)
-#args = parser.parse_args()
+import os.path
+import xml.etree.ElementTree as ET
 
-MASTER_BRANCH = 'master'
-EXAMINATED_BRANCH = 'branch'
+MASTER_BRANCH           = 'master'
+EXAMINATED_BRANCH       = 'branch'
+SHOW_DEBUG              = False
+ACCEPTABLE_NEW_PROBLEMS = 0
+TEST_PATH               = 'tests'
+RESULT_URL              = ''
+TARGET_BRANCH           = 'master'
+SAVE_RESULT             = False
+DEFAULT_CACHE_DIR       = '~/.codesheriff/'
+ONLY_ON_MASTER          = False
 
-# boolean: Show summary for each tool? 
-#SHOW_DEBUG = args.debug;
-SHOW_DEBUG = False;
 
-# integer: How many new problems are acceptable?
-ACCEPTABLE_NEW_PROBLEMS = 0;
+def setConfig(args):
+    global MASTER_BRANCH
+    global TARGET_BRANCH
+    global RESULT_URL
+    global SHOW_DEBUG
+    global TEST_PATH
+    global SAVE_RESULT
+    global DEFAULT_CACHE_DIR
+    global ONLY_ON_MASTER
 
+    if args.result != None:
+        RESULT_URL = args.result
+
+    if os.path.isfile('codesheriff.xml'):
+        tree = ET.parse('codesheriff.xml')
+        root = tree.getroot()
+        cs_node = root.find('codesheriff')
+        if cs_node != None:
+            default_test_path_node = cs_node.find('test_path')
+            if default_test_path_node != None:
+                TEST_PATH = default_test_path_node.text
+
+            default_result_url_node = cs_node.find('result_url')
+            if default_result_url_node != None:
+                RESULT_URL = default_result_url_node.text
+
+            default_cache_dir_node = cs_node.find('cache_dir')
+            if default_cache_dir_node != None:
+                DEFAULT_CACHE_DIR = default_cache_dir_node.text
+
+    TARGET_BRANCH   = args.branch
+    ONLY_ON_MASTER  = args.only
+    SHOW_DEBUG      = args.debug
+
+    if (args.master != None):
+        MASTER_BRANCH = args.master
+
+    if (args.path != None):
+        TEST_PATH = args.path
+
+    if (args.save != None):
+        SAVE_RESULT = args.save

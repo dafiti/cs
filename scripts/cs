@@ -7,44 +7,26 @@ from cs.plugins import *
 import cs.messages
 import cs.configuration as configuration
 import cs.debug as debug
-import os.path
-import xml.etree.ElementTree as ET
+
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='DCQC - code quality')
     parser.add_argument('branch', help='The branch that have to be checked')
     parser.add_argument('-p', '--path', help='The path of configurations and tests files')
+    parser.add_argument('-r', '--result', help='The server result URL')
+    parser.add_argument('-s', '--save', help='Path where to save the result locally')
+    parser.add_argument('-m', '--master', help='The default master branch')
     parser.add_argument('-d', '--debug', help='Active debug mode', action='store_true')
-    parser.add_argument('-r', '--result_url', help='The server result URL', action='store_true')
+    parser.add_argument('-o', '--only', help='Process CS only on master branch', action='store_true')
 
     args = parser.parse_args()
-    default_test_path = 'tests/'
-    default_result_url = ''
 
-    if args.result_url != None:
-        default_result_url = args.result_url
-
-    if os.path.isfile('codesheriff.xml'):
-        tree = ET.parse('codesheriff.xml')
-        root = tree.getroot()
-        cs_node = root.find('codesheriff')
-        if cs_node != None:
-            default_test_path_node = cs_node.find('test_path')
-            if default_test_path_node != None:
-                default_test_path = default_test_path_node.text
-            default_result_url_node = cs_node.find('result_url')
-            if default_result_url_node != None:
-                default_result_url = default_result_url_node.text
-
-    branch = args.branch
-    if (args.path != None):
-        default_test_path = args.path
-    
-    configuration.SHOW_DEBUG = args.debug
+    configuration.setConfig(args)
 
     cs.messages.header()
-    starter = Starter(branch, default_test_path, default_result_url)
+
+    starter = Starter()
     starter.attach(phpcs.Phpcs(starter.control_version, starter.changed_files))
     starter.attach(phpmd.Phpmd(starter.control_version, starter.changed_files))
     starter.attach(phpunitcoverage.Phpunitcoverage(starter.control_version))

@@ -14,8 +14,6 @@ class Quality:
     def run(self):
         debug.show("-" * 78)
         debug.show("Tool %s:" % (self.__class__.__name__))
-        # self.control_version.checkout_master()
-        # self.result[configuration.MASTER_BRANCH] = self.check(configuration.MASTER_BRANCH)
 
         self.control_version.checkout_current_branch()
         self.result[configuration.EXAMINATED_BRANCH] = self.check(configuration.EXAMINATED_BRANCH)
