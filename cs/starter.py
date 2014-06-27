@@ -62,7 +62,7 @@ class Starter:
 
 
     def process_plugin(self, plugin):
-        if self.process_master:
+        if self.process_master or configuration.ONLY_ON_MASTER:
             self.process_master_results(plugin)
 
         if configuration.ONLY_ON_MASTER:
@@ -94,6 +94,6 @@ class Starter:
     def save_result(self):
         filename = '%s%s.json' % (configuration.SAVE_RESULT, self.master_hash)
         debug.show("Saving the master result in: %s" % (filename))
-        results.save_master_results(filename, self.master_results)
+        self.results.save_master_results(filename, self.master_results)
 
 

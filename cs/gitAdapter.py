@@ -42,9 +42,6 @@ class GitAdapter:
         if (branch != ''):
             current_branch = branch
 
-        if (current_branch == self.base_branch):
-            raise ValueError('The current branch is master. Please, checkout to the branch which you want to check quality.')
-
         self.current_branch = current_branch
 
     def get_changed_files(self):

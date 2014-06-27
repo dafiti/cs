@@ -4,12 +4,6 @@ CS.egg-info/SOURCES.txt
 CS.egg-info/dependency_links.txt
 CS.egg-info/requires.txt
 CS.egg-info/top_level.txt
-CS.egg-info/.AppleDouble/.Parent
-CS.egg-info/.AppleDouble/PKG-INFO
-CS.egg-info/.AppleDouble/SOURCES.txt
-CS.egg-info/.AppleDouble/dependency_links.txt
-CS.egg-info/.AppleDouble/requires.txt
-CS.egg-info/.AppleDouble/top_level.txt
 cs/__init__.py
 cs/configuration.py
 cs/debug.py

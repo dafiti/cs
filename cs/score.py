@@ -1,4 +1,3 @@
-
 from subprocess import *
 from cs.quality import *
 import cs.configuration
