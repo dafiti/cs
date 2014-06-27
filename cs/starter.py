@@ -62,7 +62,8 @@ class Starter:
 
 
     def process_plugin(self, plugin):
-        if self.process_master or configuration.ONLY_ON_MASTER:
+        if self.run_master_branch(plugin):
+            debug.show('Running the cs on master for the plugin: %s' % (plugin.get_name()))
             self.process_master_results(plugin)
 
         if configuration.ONLY_ON_MASTER:
@@ -74,6 +75,23 @@ class Starter:
         status_name = plugin.get_status_name(status)
         self.scores[status_name] += 1
         debug.show("%s => %s" % (plugin.__class__.__name__, status_name))
+
+
+    def run_master_branch(self, plugin):
+
+        if self.process_master or configuration.ONLY_ON_MASTER:
+            debug.show('Setted to process master')
+            return True
+
+        if plugin.get_name() not in self.master_results:
+            debug.show('Plugin results not found on master_results')
+            return True
+
+        if not self.master_results[plugin.get_name()]:
+            debug.show('Results empty for plugin: %s' % (plugin.get_name()))
+            return True
+
+        return False
 
 
     def process_master_results(self, plugin):
