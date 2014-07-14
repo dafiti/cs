@@ -72,13 +72,17 @@ class Results:
         
         req = requests.get(req_url)
 
+        if req.status_code != 200:
+            debug.show("Invalid request status code: %s" %(req.status_code))
+            return None
+
         debug.show("Reading json from request content")
 
         try:
             data = json.loads(req.content)
         except ValueError:
             print("An error has ocurred to parse json from url: %s" % (req_url))
-            exit(2)
+            return None
 
         self.save_master_results_on_cache(data)
 
