@@ -27,7 +27,7 @@ class GitAdapter:
     def checkout_master(self):
         if (self.repo.head.reference.name == self.base_branch):
             debug.show("\nThe branch already is master")
-            return 
+            return
         self.repo.heads.master.checkout()
         debug.show("\nSwitched to branch '%s'" % (self.base_branch))
 
@@ -77,4 +77,4 @@ class GitAdapter:
         return action
 
     def get_master_hash(self):
-        return self.repo.heads.master.commit
+		return self.repo.heads[configuration.MASTER_BRANCH].commit
