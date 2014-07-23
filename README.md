@@ -13,16 +13,19 @@ before it goes live or a branch is merged into master.
 
 ## I) Requirements:
 
+```
 python 2.6+
 python-pip
+```
 
 
 And the PHP tools for each plugin:
 
+```
 phpcs
 phpmd
 phpunit
-
+```
 
 ## II) Installation:
 
@@ -37,7 +40,7 @@ sudo python setup.py install
 Note: the code sheriff requires some python plugins as 'GitPython', 'termcolor' and 'requests', but all the plugins are installed thru the python setuptools.
 
 
-### III) Usage:
+## III) Usage:
 
 ```shell
 cd project/
@@ -48,8 +51,9 @@ cs <MY_BRANCH>
 
 We have two ways to run the cs with options:
 
-1. script parameters:
+### 1. script parameters:
 
+```shell
 bruno@nobru:/var/www/project# cs --help
 usage: cs [-h] [-p PATH] [-r RESULT] [-s SAVE] [-m MASTER] [-d] [-o] branch
 
@@ -66,19 +70,19 @@ optional arguments:
   -m MASTER, --master MASTER    The default master branch
   -d, --debug                   Active debug mode
   -o, --only                    Process CS only on master branch
- 
+ ```
 
-2. Config file: 
+### 2. Config file: 
 
 The cs try to find the build.xml and parse it.
 
 Options: test_path, result_url and cache_dir
 
-test_path: the path where the cs have to find the configuration files for plugins and the phpunit tests
+*test_path:* the path where the cs have to find the configuration files for plugins and the phpunit tests
 
-cache_dir: the default cache directory
+*cache_dir:* the default cache directory
 
-result_url: the url for results API
+*result_url:* the url for results API
 
 Example for build.xml:
 
