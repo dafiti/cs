@@ -96,7 +96,7 @@ Example for build.xml:
 </project>
 ```
 
-V) How the cache works:
+### V) How the cache works:
 
 1) Code sheriff verify if the master result cache exists on the cache dir (default: ~/.codesheriff/<MASTER_HASH>.json)
 
