@@ -11,6 +11,7 @@ TARGET_BRANCH           = 'master'
 SAVE_RESULT             = False
 DEFAULT_CACHE_DIR       = '~/.codesheriff/'
 ONLY_ON_MASTER          = False
+CONFIG_FILE             = 'build.xml'
 
 
 def setConfig(args):
@@ -26,8 +27,8 @@ def setConfig(args):
     if args.result != None:
         RESULT_URL = args.result
 
-    if os.path.isfile('codesheriff.xml'):
-        tree = ET.parse('codesheriff.xml')
+    if os.path.isfile(CONFIG_FILE):
+        tree = ET.parse(CONFIG_FILE)
         root = tree.getroot()
         cs_node = root.find('codesheriff')
         if cs_node != None:
