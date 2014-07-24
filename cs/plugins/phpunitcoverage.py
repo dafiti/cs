@@ -31,7 +31,7 @@ class Phpunitcoverage(Quality):
 
         os.chdir(test_path)
 
-        command = "phpunit --coverage-text | grep --after-context=3 '^\ Summary:'"
+        command = "phpunit --coverage-text . | grep --after-context=3 '^\ Summary:'"
         coverage_result = check_output(command, shell=True)
         os.chdir(app_path)
         return self.parse_summary(coverage_result)
