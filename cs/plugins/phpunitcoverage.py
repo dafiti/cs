@@ -8,8 +8,8 @@ import cs.debug
 class Phpunitcoverage(Quality):
 
     def __init__(self, control_version):
-        try:            
-            check_output('phpunit --version', shell=True)    
+        try:
+            check_output('phpunit --version', shell=True)
         except CalledProcessError:
             print "PHPUnit is not installed. To install it take a look on: "
             print "http://phpunit.de/manual/3.7/pt_br/installation.html"
@@ -31,7 +31,7 @@ class Phpunitcoverage(Quality):
 
         os.chdir(test_path)
 
-        command = "phpunit --coverage-text . | grep --after-context=3 '^\ Summary:'"
+        command = "phpunit --coverage-text | grep --after-context=3 '^\ Summary:'"
         coverage_result = check_output(command, shell=True)
         os.chdir(app_path)
         return self.parse_summary(coverage_result)
