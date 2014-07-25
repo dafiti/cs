@@ -1,5 +1,7 @@
 # CodeSheriff
 
+[![Code Health](https://landscape.io/github/dafiti/cs/master/landscape.png)](https://landscape.io/github/dafiti/cs/master)
+
 CodeSheriff is a code quality tool mainly developed by Dafiti Brazil for PHP
 projects.
 
