@@ -13,7 +13,7 @@ class Score(Quality):
         try:
             check_output(self.check_tool, shell=True)    
         except CalledProcessError:
-            print not_installed_message
+            print self.not_installed_message
             exit(2)
         self.changed_files = changed_files
         Quality.__init__(self, control_version)
