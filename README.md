@@ -16,7 +16,7 @@ before it goes live or a branch is merged into master.
 ## I) Requirements:
 
 ```
-python 2.6+
+python 2.7+
 python-pip
 ```
 
