@@ -25,7 +25,12 @@ class Starter:
         self.default_test_path  = configuration.TEST_PATH
 
         self.results = Results(self.master_hash)
-        data = self.results.get_master_results()
+
+        data = None
+
+        if configuration.USE_CACHE:
+            debug.show('Using cache...')
+            data = self.results.get_master_results()
 
         if data != None:
             self.master_results = data
