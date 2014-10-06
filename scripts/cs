@@ -19,6 +19,7 @@ if __name__ == "__main__":
     parser.add_argument('-m', '--master', help='The default master branch')
     parser.add_argument('-d', '--debug', help='Active debug mode', action='store_true')
     parser.add_argument('-o', '--only', help='Process CS only on master branch', action='store_true')
+    parser.add_argument('-c', '--cache', help='Use cache?', action='store_true')
 
 
     args = parser.parse_args()

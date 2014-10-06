@@ -12,6 +12,7 @@ SAVE_RESULT             = False
 DEFAULT_CACHE_DIR       = '~/.codesheriff/'
 ONLY_ON_MASTER          = False
 CONFIG_FILE             = 'build.xml'
+USE_CACHE               = False
 
 
 def setConfig(args):
@@ -23,6 +24,7 @@ def setConfig(args):
     global SAVE_RESULT
     global DEFAULT_CACHE_DIR
     global ONLY_ON_MASTER
+    global USE_CACHE
 
     if args.result != None:
         RESULT_URL = args.result
@@ -56,3 +58,6 @@ def setConfig(args):
 
     if (args.save != None):
         SAVE_RESULT = args.save
+
+    if (args.cache != None):
+        USE_CACHE = args.cache
